@@ -1,17 +1,16 @@
 import { Link2Icon, CopyCheckIcon, CheckCircle2Icon } from "lucide-react";
 import { useState } from "react";
-import testUserImage from "../../../assets/testUserImage.jpg";
 
 interface ShareOptionsProps {
   linkToCopy: string;
 }
-
+const friendAvatar = "/testUserImage.jpg";
 function Friend() {
   return (
     <div className="flex flex-col items-center">
       <img
         className="w-10 h-10 rounded-full object-cover"
-        src={testUserImage}
+        src={friendAvatar}
         alt="t"
       />
       <span className="mt-1 text-xs text-text-light group-hover:text-inherit">

@@ -15,7 +15,7 @@ export default function CommentsSection(props: CommentsProps) {
           no comments found, be the first to comment!
         </p>
       ) : (
-        props.children
+        <div className="flex flex-col gap-7">{props.children}</div>
       )}
 
       <div className="bg-accent rounded-md relative">

@@ -6,10 +6,15 @@ import ShareButton from "../Buttons/ShareButton";
 import useClickOutside from "../../../hooks/useClickOutside";
 import CommentsSection from "./CommentsSection";
 import Comment from "./CommentsSectionComponents/Comment";
-import testUserImage from "../../../assets/testUserImage.jpg";
 import ShareOptions from "./ShareOptions";
 interface InteractionProps {
   linkToCopy: string;
+  comments: {
+    id: number;
+    author: string;
+    authorAvatar: string;
+    text: string;
+  }[];
 }
 export default function Interaction(props: InteractionProps) {
   const [showComments, setShowComments] = useState(false);
@@ -28,11 +33,9 @@ export default function Interaction(props: InteractionProps) {
       <CommentButton onClick={() => setShowComments((prev) => !prev)} />
       {showComments && (
         <CommentsSection ref={showCommentsRef}>
-          <Comment
-            author="emily"
-            text="what a beautiful cow"
-            authorAvatar={testUserImage}
-          />
+          {props.comments.map((comment) => (
+            <Comment {...comment} />
+          ))}
         </CommentsSection>
       )}
       <div className="flex items-center relative" ref={shareRef}>

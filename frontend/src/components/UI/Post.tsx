@@ -1,6 +1,4 @@
 import { useState, useRef } from "react";
-import testUserImage from "../../assets/testUserImage.jpg";
-import testPostImage from "../../assets/testPostImage.jpg";
 import useClickOutside from "../../hooks/useClickOutside";
 import { MapPinIcon, DotIcon, EllipsisIcon, MinusIcon } from "lucide-react";
 import PostOptions from "./PostComponents/PostOptions";
@@ -10,13 +8,32 @@ const postData = {
   id: "123013",
   user: "pixshanghai",
   location: "lechería",
-  avatar: "../../assets/testUserImage.jpg",
-  postMedia: "../../assets/testPostImage.jpg",
+  avatar: "/testUserImage.jpg",
+  postMedia: "/testPostImage.jpg",
   description: "going back to the phase where cows are in my head.",
   createdAt: "10h",
   url: "https://red404.app/post/123013",
 };
-
+const commentData = [
+  {
+    id: 1,
+    author: "leonardo",
+    authorAvatar: "/testUserImage.jpg",
+    text: "how beautiful",
+  },
+  {
+    id: 2,
+    author: "mark",
+    authorAvatar: "/testUserImage.jpg",
+    text: "󰱱",
+  },
+  {
+    id: 3,
+    author: "tobias",
+    authorAvatar: "/testUserImage.jpg",
+    text: "i need to buy some meat",
+  },
+];
 function PostHeader() {
   const [showPostOptions, setShowPostOptions] = useState(false);
   const dropdownRef = useRef(null);
@@ -28,7 +45,7 @@ function PostHeader() {
       <div className="flex gap-2">
         <img
           className="w-10 h-10 rounded-full"
-          src={testUserImage}
+          src={postData.avatar}
           alt="user-profile-photo"
         />
         <div className="info flex flex-col gap-1">
@@ -67,15 +84,15 @@ function Post() {
       <PostHeader />
       <img
         className="w-full h-96 object-cover rounded-md"
-        src={testPostImage}
+        src={postData.postMedia}
         alt="post-media"
       />
-      <Interaction linkToCopy={postData.url} />
+      <Interaction linkToCopy={postData.url} comments={commentData} />
+      {/* footer */}
       <p className="text-[0.96rem]">
         <span className="post-author font-bold">{postData.user}:</span>{" "}
         {postData.description}
       </p>
-      {/* footer */}
       <p className="pl-2 text-[0.96rem] flex gap-0.5">
         <MinusIcon />
         <span className="post-author font-bold">simonbolivar:</span> me fr dude
