@@ -1,15 +1,11 @@
 import { type ReactNode } from "react";
-import SendButton from "../Buttons/SendButton";
+import SendButton from "./Buttons/SendButton";
 interface CommentsProps {
   children: ReactNode;
-  ref?: React.Ref<HTMLDivElement>;
 }
 export default function CommentsSection(props: CommentsProps) {
   return (
-    <div
-      ref={props.ref}
-      className="fixed z-10 bg-base w-lg flex flex-col justify-between top-0 right-0 h-screen border-l border-accent p-4"
-    >
+    <div className="fixed z-10 bg-base w-lg flex flex-col justify-between top-0 right-0 h-screen border-l border-accent p-4">
       {!props.children ? (
         <p className="self-center my-auto">
           no comments found, be the first to comment!
