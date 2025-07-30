@@ -3,6 +3,7 @@ package repositories
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/escuadron-404/red404/backend/internal/models"
 	"github.com/jackc/pgx/v5"
@@ -27,6 +28,9 @@ func NewUserRepository(db *pgxpool.Pool) UserRepository {
 }
 
 func (r *userRepository) Create(ctx context.Context, user *models.User) error {
+	now := time.Now()
+	user.CreatedAt = now
+	user.UpdatedAt = now
 	query := `INSERT INTO users (email, password, created_at, updated_at) 
               VALUES ($1, $2, $3, $4) RETURNING id`
 	return r.db.QueryRow(ctx, query, user.Email, user.Password, user.CreatedAt, user.UpdatedAt).

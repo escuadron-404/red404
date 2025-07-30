@@ -68,8 +68,10 @@ func (s *authService) Register(ctx context.Context, req dto.RegisterRequest) (*d
 
 	// Return response
 	userResponse := dto.UserResponse{
-		ID:    user.ID,
-		Email: user.Email,
+		ID:        user.ID,
+		Email:     user.Email,
+		CreatedAt: user.CreatedAt,
+		UpdatedAt: user.UpdatedAt,
 	}
 
 	return &dto.AuthResponse{
