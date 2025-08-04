@@ -8,7 +8,7 @@ backend/.env
 *.log
 
 # Go
-./backend/tmp 
+backend/tmp 
 backend/.air.toml 
 # Node.js / React / Vite
 frontend/node_modules/
