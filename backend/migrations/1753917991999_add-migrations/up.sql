@@ -59,12 +59,17 @@ CREATE TABLE post_tags (
     FOREIGN KEY (tag_id) REFERENCES hashtags(id)
 );
 
-ALTER TABLE users
-  ADD COLUMN full_name VARCHAR(255),
-  ADD COLUMN bio TEXT,
-  ADD COLUMN profile_picture TEXT,
-  ADD COLUMN deleted BOOLEAN DEFAULT FALSE,
-  ADD COLUMN deleted_at TIMESTAMP;
+CREATE TABLE users (
+  full_name VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255),
+  bio TEXT,
+  profile_picture TEXT,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP,
+  deleted BOOLEAN DEFAULT FALSE,
+  deleted_at TIMESTAMP
+);
 
 
 CREATE INDEX idx_users_email_deleted ON users(email,deleted);
