@@ -1,3 +1,4 @@
+// Package handlers defines methods for initial request handling
 package handlers
 
 import (
@@ -16,10 +17,10 @@ type AuthHandler struct {
 	validator   *validator.Validate
 }
 
-func NewAuthHandler(authService services.AuthService, validator *validator.Validate) *AuthHandler {
+func NewAuthHandler(authService services.AuthService, authValidator *validator.Validate) *AuthHandler {
 	return &AuthHandler{
 		authService: authService,
-		validator:   validator,
+		validator:   authValidator,
 	}
 }
 
@@ -68,7 +69,7 @@ func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AuthHandler) handleValidationErrors(w http.ResponseWriter, err error) {
-	var validationErrors []dto.ValidationError
+	var validationErrors = make([]dto.ValidationError, len(err.(validator.ValidationErrors)))
 
 	for _, err := range err.(validator.ValidationErrors) {
 		var message string

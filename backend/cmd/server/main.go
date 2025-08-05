@@ -40,13 +40,15 @@ func main() {
 
 	db, err := database.NewDB(dbConfig)
 	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
+		log.Printf("Failed to connect to database: %v\n", err)
+		return
 	}
 	defer db.Close()
 
 	// Run migrations
 	if err := runMigrations(db.Pool); err != nil {
-		log.Fatal("Failed to run migrations:", err)
+		log.Printf("Failed to run migrations: %v\n", err)
+		return
 	}
 
 	// Initialize utilities
@@ -76,27 +78,32 @@ func main() {
 		Handler: mux,
 	}
 
+	// Wait for interrupt signal to gracefully shutdown the server
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM) // Listen for Ctrl+C and termination signals
+
 	// Start server in a goroutine
 	go func() {
 		log.Printf("Server starting on port %s", cfg.ServerPort)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatal("Server failed to start:", err)
+			log.Printf("Server failed to start: %v\n", err)
+			// FIX: Instead of os.Exit(1), signal the main goroutine to shut down.
+			quit <- syscall.SIGTERM
 		}
 	}()
 
-	// Wait for interrupt signal to gracefully shutdown the server
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	<-quit
+	<-quit // Block until a signal is received
 	log.Println("Shutting down server...")
 
 	// The context is used to inform the server it has 5 seconds to finish
 	// the request it is currently handling
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
+	defer cancel() // This defer will now correctly run
 
 	if err := server.Shutdown(ctx); err != nil {
-		log.Fatal("Server forced to shutdown:", err)
+		log.Printf("Server forced to shutdown: %v\n", err)
+		// FIX: Replace os.Exit(1) with return.
+		return
 	}
 
 	log.Println("Server exited")

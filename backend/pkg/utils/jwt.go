@@ -1,3 +1,5 @@
+// Package utils provides common utility functions used across the application,
+// including hashing and JWT-related operations.
 package utils
 
 import (
@@ -45,7 +47,7 @@ func (j *JWTUtil) GenerateToken(userID int, email string) (string, error) {
 func (j *JWTUtil) ValidateToken(tokenString string) (*Claims, error) {
 	claims := &Claims{}
 
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (any, error) {
 		return j.secretKey, nil
 	})
 

@@ -15,7 +15,7 @@ import (
 type UserService interface {
 	CreateUser(ctx context.Context, req dto.CreateUserRequest) (*dto.UserResponse, error)
 	GetUserByID(ctx context.Context, id int) (*dto.UserResponse, error)
-	GetAllUsers(ctx context.Context) ([]dto.UserResponse, error)
+	GetAllUsers(ctx context.Context, limit, offset int) ([]dto.UserResponse, int, error)
 	UpdateUser(ctx context.Context, id int, req dto.UpdateUserRequest) (*dto.UserResponse, error)
 	DeleteUser(ctx context.Context, id int) error
 }
@@ -25,10 +25,10 @@ type userService struct {
 	validator *validator.Validate
 }
 
-func NewUserService(repo repositories.UserRepository, validator *validator.Validate) UserService {
+func NewUserService(repo repositories.UserRepository, userValidator *validator.Validate) UserService {
 	return &userService{
 		repo:      repo,
-		validator: validator,
+		validator: userValidator,
 	}
 }
 
@@ -87,13 +87,13 @@ func (s *userService) GetUserByID(ctx context.Context, id int) (*dto.UserRespons
 	}, nil
 }
 
-func (s *userService) GetAllUsers(ctx context.Context) ([]dto.UserResponse, error) {
-	users, err := s.repo.GetAll(ctx)
+func (s *userService) GetAllUsers(ctx context.Context, limit, offset int) ([]dto.UserResponse, int, error) {
+	users, totalCount, err := s.repo.GetAll(ctx, limit, offset)
 	if err != nil {
-		return nil, err
+		return nil, 0, fmt.Errorf("service failed to get paginated users from repo: %w", err)
 	}
 
-	var userResponses []dto.UserResponse
+	userResponses := make([]dto.UserResponse, 0, len(users))
 	for _, user := range users {
 		userResponses = append(userResponses, dto.UserResponse{
 			ID:        user.ID,
@@ -103,7 +103,7 @@ func (s *userService) GetAllUsers(ctx context.Context) ([]dto.UserResponse, erro
 		})
 	}
 
-	return userResponses, nil
+	return userResponses, totalCount, nil
 }
 
 func (s *userService) UpdateUser(ctx context.Context, id int, req dto.UpdateUserRequest) (*dto.UserResponse, error) {

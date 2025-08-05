@@ -1,3 +1,4 @@
+// Package routes defines the HTTP verbs that the application supports
 package routes
 
 import (
@@ -26,9 +27,6 @@ func AuthRoutes(mux *http.ServeMux, authHandler *handlers.AuthHandler) {
 }
 
 func UserRoutes(mux *http.ServeMux, userHandler *handlers.UserHandler, authMiddleware *middleware.AuthMiddleware) {
-	// mux.HandleFunc("POST /api/users", authMiddleware.Auth(userHandler.CreateUser))
 	mux.HandleFunc("GET /api/users/{id}", authMiddleware.Auth(userHandler.GetUserByID))
 	mux.HandleFunc("GET /api/users", authMiddleware.Auth(userHandler.GetAllUsers))
-	// mux.HandleFunc("PUT /api/users/{id}", authMiddleware.Auth(userHandler.UpdateUser))
-	// mux.HandleFunc("DELETE /api/users/{id}", authMiddleware.Auth(userHandler.DeleteUser))
 }
