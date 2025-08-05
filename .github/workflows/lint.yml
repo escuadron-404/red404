@@ -1,0 +1,65 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - 'fix*' 
+      - 'feat*' 
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+      - '.golangci.yml'
+      - 'package.json'
+      - 'package-lock.json' 
+      - 'frontend/biome.json' 
+
+  pull_request:
+    types: [opened, synchronize, reopened] 
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+      - '.golangci.yml'
+      - 'package.json'
+      - 'package-lock.json' 
+      - 'frontend/biome.json'
+      
+jobs:
+  golangci-lint:
+    name: golangci-lint (Backend)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v8 
+        with:
+          working-directory: backend/
+          version: latest
+          args: --config=../.golangci.yml --timeout 5m
+
+  biome-lint:
+    name: Biome Lint (Frontend)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.4.0' 
+          cache: 'npm' 
+
+      - name: Install Frontend Dependencies
+        working-directory: frontend/ 
+        run: npm ci 
+
+      - name: Setup Biome CLI
+        uses: biomejs/setup-biome@v2 
+        with:
+          version: latest 
+
+      - name: Run Biome CI
+        working-directory: frontend/ 
+        run: biome ci . 
