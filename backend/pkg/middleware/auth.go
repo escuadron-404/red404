@@ -1,3 +1,4 @@
+// Package middleware defines intermediate processing for requests such as auth and cpntext retrieval
 package middleware
 
 import (

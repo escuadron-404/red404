@@ -1,3 +1,4 @@
+// Package services defines business-level logic for use in handlers
 package services
 
 import (
@@ -22,10 +23,10 @@ type authService struct {
 	jwtUtil   *utils.JWTUtil
 }
 
-func NewAuthService(userRepo repositories.UserRepository, validator *validator.Validate, jwtUtil *utils.JWTUtil) AuthService {
+func NewAuthService(userRepo repositories.UserRepository, authValidator *validator.Validate, jwtUtil *utils.JWTUtil) AuthService {
 	return &authService{
 		userRepo:  userRepo,
-		validator: validator,
+		validator: authValidator,
 		jwtUtil:   jwtUtil,
 	}
 }

@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -17,10 +18,10 @@ type UserHandler struct {
 	validator   *validator.Validate
 }
 
-func NewUserHandler(userService services.UserService, validator *validator.Validate) *UserHandler {
+func NewUserHandler(userService services.UserService, userValidator *validator.Validate) *UserHandler {
 	return &UserHandler{
 		userService: userService,
-		validator:   validator,
+		validator:   userValidator,
 	}
 }
 
@@ -63,13 +64,43 @@ func (h *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
-	users, err := h.userService.GetAllUsers(r.Context())
+	ctx := r.Context()
+
+	limitStr := r.URL.Query().Get("limit")
+	offsetStr := r.URL.Query().Get("offset")
+
+	limit, err := strconv.Atoi(limitStr)
+	if err != nil || limit <= 0 {
+		limit = 10
+	}
+
+	offset, err := strconv.Atoi(offsetStr)
+	if err != nil || offset < 0 {
+		offset = 0
+	}
+
+	users, totalCount, err := h.userService.GetAllUsers(ctx, limit, offset)
 	if err != nil {
-		common.ErrorResponse(w, http.StatusInternalServerError, "Failed to retrieve users", nil)
+		http.Error(w, "Failed to retrieve users", http.StatusInternalServerError)
 		return
 	}
 
-	common.SuccessResponse(w, users, "Users retrieved successfully")
+	response := struct {
+		Data       []dto.UserResponse `json:"data"`
+		TotalCount int                `json:"total_count"`
+		Limit      int                `json:"limit"`
+		Offset     int                `json:"offset"`
+	}{
+		Data:       users,
+		TotalCount: totalCount,
+		Limit:      limit,
+		Offset:     offset,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		log.Printf("Error encoding GetPaginatedUsers response: %v", err)
+	}
 }
 
 func (h *UserHandler) UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -117,7 +148,7 @@ func (h *UserHandler) DeleteUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *UserHandler) handleValidationErrors(w http.ResponseWriter, err error) {
-	var validationErrors []dto.ValidationError
+	var validationErrors = make([]dto.ValidationError, len(err.(validator.ValidationErrors)))
 
 	for _, err := range err.(validator.ValidationErrors) {
 		var message string

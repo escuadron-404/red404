@@ -1,3 +1,4 @@
+// Package migration handles running migrations at startup
 package migration
 
 import (
@@ -12,12 +13,14 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
+const MaxMigrations = 20
+
 type MigrationResult struct {
 	Name  string
 	Count int
 }
 type Migration struct {
-	Id        int
+	ID        int
 	Name      string
 	CreatedAt time.Time
 }
@@ -49,7 +52,7 @@ func (m *MigrationService) Up() error {
 		return err
 	}
 
-	successFiles := []MigrationResult{}
+	successFiles := make([]MigrationResult, 0, len(localMigrations))
 	for _, migration := range localMigrations {
 		if !slices.Contains(dbMigrations, migration) {
 			count, err := m.runMigration(migration, MigrationTypeUp)
@@ -88,9 +91,13 @@ func (m *MigrationService) Down() error {
 	if err != nil {
 		return err
 	}
+	if len(dbMigrations) == 0 {
+		log.Println("No migrations found in DB to roll down.")
+		return nil
+	}
 	lastMigration := dbMigrations[len(dbMigrations)-1]
 
-	successFiles := []MigrationResult{}
+	successFiles := make([]MigrationResult, 0, 1)
 
 	for _, migration := range localMigrations {
 		if migration == lastMigration {
@@ -129,7 +136,8 @@ func (m *MigrationService) GetDBMigrations() ([]string, error) {
 
 	defer rows.Close()
 
-	var migrations []string
+	var migrations = make([]string, 0, MaxMigrations)
+
 	for rows.Next() {
 		var migration string
 		if err := rows.Scan(&migration); err != nil {
@@ -147,7 +155,7 @@ func (m *MigrationService) GetLocalMigrations() ([]string, error) {
 		return nil, err
 	}
 
-	var migrations []string
+	migrations := make([]string, 0, len(files))
 	for _, file := range files {
 		migrations = append(migrations, file.Name())
 	}

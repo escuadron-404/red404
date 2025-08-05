@@ -1,0 +1,83 @@
+version: "2"
+run:
+  issues-exit-code: 1
+  tests: false
+linters:
+  default: none
+  enable:
+    - asciicheck
+    - cyclop
+    - dupl
+    - errcheck
+    - funlen
+    - gocritic
+    - gocyclo
+    - govet
+    - ineffassign
+    - misspell
+    - nakedret
+    - prealloc
+    - rowserrcheck
+    - staticcheck
+    - unconvert
+    - unused
+    - whitespace
+  settings:
+    errcheck:
+      exclude-functions:
+        - fmt.Printf
+        - fmt.Errorf
+        - errors.New
+    funlen:
+      lines: 100
+      statements: 50
+    gocritic:
+      disabled-checks:
+        - whyNoLint
+        - ifElseChain
+      enabled-tags:
+        - performance
+        - style
+        - experimental
+        - opinionated
+    gocyclo:
+      min-complexity: 10
+    misspell:
+      locale: US
+    nakedret:
+      max-func-lines: 30
+    prealloc:
+      simple: true
+      range-loops: true
+      for-loops: true
+    staticcheck:
+      checks:
+        - all
+        - -SA1019
+  exclusions:
+    generated: lax
+    rules:
+      - path: (.+)\.go$
+        text: weak cryptographic algorithm
+    paths:
+      - vendor
+      - third_party
+      - build
+      - tmp
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - vendor
+      - third_party
+      - build
+      - tmp
+      - third_party$
+      - builtin$
+      - examples$

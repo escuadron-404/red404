@@ -1,3 +1,4 @@
+// Package repositories defines a DAL/WAL for db
 package repositories
 
 import (
@@ -14,7 +15,7 @@ type UserRepository interface {
 	Create(ctx context.Context, user *models.User) error
 	GetByID(ctx context.Context, id int) (*models.User, error)
 	GetByEmail(ctx context.Context, email string) (*models.User, error)
-	GetAll(ctx context.Context) ([]models.User, error)
+	GetAll(ctx context.Context, limit, offset int) ([]models.User, int, error)
 	Update(ctx context.Context, user *models.User) error
 	Delete(ctx context.Context, id int) error
 }
@@ -65,25 +66,40 @@ func (r *userRepository) GetByEmail(ctx context.Context, email string) (*models.
 	return user, nil
 }
 
-func (r *userRepository) GetAll(ctx context.Context) ([]models.User, error) {
-	query := `SELECT id, email, password, created_at, updated_at FROM users ORDER BY id`
-	rows, err := r.db.Query(ctx, query)
+func (r *userRepository) GetAll(ctx context.Context, limit, offset int) ([]models.User, int, error) {
+	var totalUsers int
+	countQuery := `SELECT COUNT(*) FROM users`
+	err := r.db.QueryRow(ctx, countQuery).Scan(&totalUsers)
 	if err != nil {
-		return nil, err
+		return nil, 0, fmt.Errorf("failed to count users for pagination: %w", err)
+	}
+
+	if totalUsers == 0 {
+		return []models.User{}, 0, nil
+	}
+
+	query := `SELECT id, email, password, created_at, updated_at FROM users ORDER BY id LIMIT $1 OFFSET $2`
+	rows, err := r.db.Query(ctx, query, limit, offset)
+	if err != nil {
+		return nil, 0, fmt.Errorf("failed to query paginated users: %w", err)
 	}
 	defer rows.Close()
 
-	var users []models.User
+	users := make([]models.User, 0, limit)
+
 	for rows.Next() {
 		var user models.User
-		err := rows.Scan(&user.ID, &user.Email, &user.Password, &user.CreatedAt, &user.UpdatedAt)
-		if err != nil {
-			return nil, err
+		if err := rows.Scan(&user.ID, &user.Email, &user.Password, &user.CreatedAt, &user.UpdatedAt); err != nil {
+			return nil, 0, fmt.Errorf("failed to scan user row during pagination: %w", err)
 		}
 		users = append(users, user)
 	}
 
-	return users, nil
+	if err := rows.Err(); err != nil {
+		return nil, 0, fmt.Errorf("error during paginated rows iteration: %w", err)
+	}
+
+	return users, totalUsers, nil
 }
 
 func (r *userRepository) Update(ctx context.Context, user *models.User) error {

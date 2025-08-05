@@ -13,7 +13,7 @@ RUN go install github.com/air-verse/air@latest
 # Copy your .air.toml configuration
 # This should be in the same directory as your Dockerfile (i.e., backend/.air.toml)
 COPY .air.toml .
-COPY ../.env .
+COPY .env .
 
 # Expose the port the application listens on
 EXPOSE 8080

@@ -1,3 +1,4 @@
+// Package dto declares the representation for data flow (Data Transfer Object)
 package dto
 
 import "time"

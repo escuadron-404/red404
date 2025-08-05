@@ -1,3 +1,4 @@
+// Package models defines the shape of data in memory
 package models
 
 import (
