@@ -23,3 +23,4 @@ DROP TABLE followers;
 DROP TABLE follow_request;
 DROP TABLE hashtags;
 DROP TABLE post_tags;
+DROP TABLE users;

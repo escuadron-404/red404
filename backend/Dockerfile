@@ -1,32 +1,24 @@
-# Stage 1: Build the Go application
-FROM golang:1.23-alpine AS builder
+# Use a Go base image for development
+FROM golang:1.24-alpine
 
 WORKDIR /app
 
+# Copy go.mod and go.sum first to leverage Docker cache
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . .
+# Install air
+RUN go install github.com/air-verse/air@latest
 
-# Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -o /main ./cmd/api
-
-# Stage 2: Create a minimal image
-FROM alpine:latest
-
-WORKDIR /app
-
-# Install any runtime dependencies if needed (e.g., ca-certificates for HTTPS)
-RUN apk add --no-cache ca-certificates
-
-# Copy the compiled binary from the builder stage
-COPY --from=builder /main .
-
-# Copy .air.toml for local dev within container (if you choose that path)
-COPY backend/.air.toml .
+# Copy your .air.toml configuration
+# This should be in the same directory as your Dockerfile (i.e., backend/.air.toml)
+COPY .air.toml .
+COPY ../.env .
 
 # Expose the port the application listens on
 EXPOSE 8080
 
-# Command to run the application
-CMD ["./main"] # This will be overridden by `air` for dev, or by your production entrypoint
+# The CMD here sets the default command if not overridden.
+# In your docker-compose.yml, you *are* overriding it with 'command: sh -c "sleep 5 && air"'
+# So this CMD is less critical here but good practice.
+CMD ["air", "-c", ".air.toml"]
