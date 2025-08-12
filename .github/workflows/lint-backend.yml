@@ -23,6 +23,8 @@ on:
       - '.github/**'
       - '.gitignore'
       
+permissions:
+  contents: read
 jobs:
   golangci-lint:
     name: golangci-lint (Backend)
