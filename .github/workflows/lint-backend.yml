@@ -1,0 +1,41 @@
+name: Lint Backend
+
+on:
+  push:
+    branches:
+      - 'fix*' 
+      - 'feat*' 
+    paths:
+      - 'backend/**'
+      - '.golangci.yml'
+      - 'docker-compose.yml'
+      - 'Makefile'
+      - '.github/**'
+      - '.gitignore'
+
+  pull_request:
+    types: [opened, synchronize, reopened] 
+    paths:
+      - 'backend/**'
+      - '.golangci.yml'
+      - 'docker-compose.yml'
+      - 'Makefile'
+      - '.github/**'
+      - '.gitignore'
+      
+permissions:
+  contents: read
+jobs:
+  golangci-lint:
+    name: golangci-lint (Backend)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run golangci-lint
+        uses: golangci/golangci-lint-action@v8 
+        with:
+          working-directory: backend/
+          version: latest
+          args: --config=../.golangci.yml --timeout 5m
