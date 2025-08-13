@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
-import NavBar from "../components/NavBar";
 import ContentContainer from "../components/UI/ProfileComponents/ContentContainer";
 import Tabs from "../components/UI/ProfileComponents/Tabs";
 import profileData from "../templates/ProfileTemplate";
@@ -136,50 +135,47 @@ function Highlights(props: HighlightsProps) {
 }
 export default function ProfilePage() {
 	return (
-		<div className="w-full flex bg-base min-h-screen font-sans">
-			<NavBar />
-			<main className="w-full min-h-screen flex flex-col gap-10 pl-20 py-4">
-				<Bio />
-				<div className="flex w-full items-start gap-10">
-					<Highlights>
-						<ul className="flex flex-col gap-5">
-							{profileData.highlightsData.map((highlight) => (
-								<li key={highlight.id}>
-									<Highlight title={highlight.title} link={highlight.link} />
-								</li>
-							))}
-						</ul>
-					</Highlights>
-					<div className="flex w-full flex-col gap-4 pr-10">
-						<Tabs />
-						<Routes>
-							<Route
-								index
-								element={
-									<ContentContainer>
-										{profileData.posts.map((post) => (
-											<div key={post.id} className="group h-64">
-												<a
-													href={`/${profileData.userData.userName}/posts/${post.id}`}
-												>
-													<img
-														className="rounded-sm group-hover:opacity-40 transition duration-150 ease-in-out"
-														src={post.postMedia}
-														alt="post media"
-													/>
-												</a>
-											</div>
-										))}
-									</ContentContainer>
-								}
-							/>
-							<Route path="brainrot" element={<div>brainrot</div>} />
-							<Route path="saved" element={<div>saved</div>} />
-							<Route path="highlights" element={<div>highlight</div>} />
-						</Routes>
-					</div>
+		<main className="w-full min-h-screen flex flex-col gap-10 pl-20 py-4">
+			<Bio />
+			<div className="flex w-full items-start gap-10">
+				<Highlights>
+					<ul className="flex flex-col gap-5">
+						{profileData.highlightsData.map((highlight) => (
+							<li key={highlight.id}>
+								<Highlight title={highlight.title} link={highlight.link} />
+							</li>
+						))}
+					</ul>
+				</Highlights>
+				<div className="flex w-full flex-col gap-4 pr-10">
+					<Tabs />
+					<Routes>
+						<Route
+							index
+							element={
+								<ContentContainer>
+									{profileData.posts.map((post) => (
+										<div key={post.id} className="group h-64">
+											<a
+												href={`/${profileData.userData.userName}/posts/${post.id}`}
+											>
+												<img
+													className="rounded-sm group-hover:opacity-40 transition duration-150 ease-in-out"
+													src={post.postMedia}
+													alt="post media"
+												/>
+											</a>
+										</div>
+									))}
+								</ContentContainer>
+							}
+						/>
+						<Route path="brainrot" element={<div>brainrot</div>} />
+						<Route path="saved" element={<div>saved</div>} />
+						<Route path="highlights" element={<div>highlight</div>} />
+					</Routes>
 				</div>
-			</main>
-		</div>
+			</div>
+		</main>
 	);
 }
