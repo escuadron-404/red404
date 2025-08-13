@@ -32,7 +32,7 @@ export default function Interaction(props: InteractionProps) {
 				{showComments && (
 					<CommentsSection>
 						{props.comments.map((comment) => (
-							<Comment {...comment} />
+							<Comment key={comment.id} {...comment} />
 						))}
 					</CommentsSection>
 				)}

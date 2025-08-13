@@ -1,49 +1,26 @@
 import { DotIcon, EllipsisIcon, MapPinIcon, MinusIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
+import postData from "../../templates/PostTemplate.tsx";
+import HideButton from "./Buttons/HideButton.tsx";
+import ReportButton from "./Buttons/ReportButton";
+import UnfollowButton from "./Buttons/UnfollowButton";
 import Interaction from "./PostComponents/Interaction";
-import PostOptions from "./PostComponents/PostOptions";
 
-const postData = {
-	id: "123013",
-	user: "pixshanghai",
-	location: "lechería",
-	avatar: "/testUserImage.jpg",
-	postMedia: "/testPostImage.jpg",
-	description: "going back to the phase where cows are in my head.",
-	createdAt: "10h",
-	url: "https://red404.app/post/123013",
-};
-const commentData = [
-	{
-		id: 1,
-		author: "leonardo",
-		authorAvatar: "/testUserImage.jpg",
-		text: "how beautiful",
-		isReply: false,
-		replies: 1,
-		likes: 0,
-	},
-	{
-		id: 2,
-		author: "mark",
-		authorAvatar: "/testUserImage.jpg",
-		text: "󰱱",
-		isReply: true,
-		replies: null,
-		likes: 2,
-	},
-	{
-		id: 3,
-		author: "tobias",
-		authorAvatar: "/testUserImage.jpg",
-		text: "i need to buy some meat",
-		isReply: false,
-		replies: null,
-		likes: 3,
-	},
-];
-function PostHeader() {
+interface PostActions {
+	onClickHide: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+function PostOptions(props: PostActions) {
+	return (
+		<div className="absolute right-0  border border-accent p-2 rounded-md bg-base">
+			<HideButton {...props} />
+			<ReportButton onClick={() => console.log("reported")} />
+			<UnfollowButton onClick={() => console.log("unfollowed")} />
+		</div>
+	);
+}
+
+function PostHeader(props: PostActions) {
 	const [showPostOptions, setShowPostOptions] = useState(false);
 	const dropdownRef = useRef(null);
 	useClickOutside(dropdownRef, () => {
@@ -52,14 +29,18 @@ function PostHeader() {
 	return (
 		<div className="author justify-between flex gap-5">
 			<div className="flex gap-2">
-				<img
-					className="w-10 h-10 rounded-full"
-					src={postData.avatar}
-					alt="user-profile-photo"
-				/>
+				<a href="/profile">
+					<img
+						className="w-10 h-10 rounded-full"
+						src={postData.avatar}
+						alt="user-profile-photo"
+					/>
+				</a>
 				<div className="info flex flex-col gap-1">
 					<div className="flex items-center gap-1">
-						<span className="post-author font-bold">{postData.user}</span>
+						<a href="/profile" className="post-author font-bold">
+							{postData.user}
+						</a>
 						<time className="flex items-center">
 							<DotIcon />
 							<span className="text-text-light">{postData.createdAt}</span>
@@ -82,21 +63,34 @@ function PostHeader() {
 						height={20}
 					/>
 				</button>
-				{showPostOptions && <PostOptions />}
+				{showPostOptions && <PostOptions {...props} />}
 			</div>
 		</div>
 	);
 }
 function Post() {
+	const [hidePost, setHidePost] = useState(false);
+	function handleHidePost() {
+		setHidePost(!hidePost);
+	}
+	if (hidePost)
+		return (
+			<div className="flex bg-accent items-center justify-center w-md p-5 rounded-md">
+				<span>Post has been hidden</span>
+			</div>
+		);
 	return (
-		<div className="post flex flex-col gap-3 w-md" id={postData.id}>
-			<PostHeader />
+		<div className="flex flex-col gap-3 w-md" id={postData.id}>
+			<PostHeader onClickHide={handleHidePost} />
 			<img
 				className="w-full h-96 object-cover rounded-md"
 				src={postData.postMedia}
 				alt="post-media"
 			/>
-			<Interaction linkToCopy={postData.url} comments={commentData} />
+			<Interaction
+				linkToCopy={postData.url}
+				comments={postData.commentsData.comments}
+			/>
 			{/* footer */}
 			<p className="text-[0.96rem]">
 				<span className="post-author font-bold">{postData.user}:</span>{" "}
