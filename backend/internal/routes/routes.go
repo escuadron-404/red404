@@ -11,6 +11,8 @@ import (
 // SetupRoutes configures all application routes.
 func SetupRoutes(userHandler *handlers.UserHandler, authHandler *handlers.AuthHandler, authMiddleware *middleware.AuthMiddleware) http.Handler {
 	mux := http.NewServeMux()
+	// Register static route / frontend
+	RegisterFrontendHandlers(mux)
 
 	// Register authentication-related routes
 	AuthRoutes(mux, authHandler)

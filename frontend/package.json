@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --host 0.0.0.0",
 		"build": "tsc -b && vite build",
 		"lint:write": "npx @biomejs/biome check --write .",
 		"lint": "npx @biomejs/biome check .",
@@ -17,7 +17,7 @@
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"react-hook-form": "^7.61.1",
-		"react-router-dom": "^7.7.1",
+		"react-router": "^7.8.0",
 		"tailwindcss": "^4.1.11",
 		"zustand": "^5.0.6"
 	},

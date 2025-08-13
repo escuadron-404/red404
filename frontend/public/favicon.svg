@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1136)"><rect width="1000" height="1000" fill="#000000"></rect><g transform="matrix(1.6666666666666667,0,0,1.6666666666666667,150,150)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="420"><svg width="420" height="420" viewBox="0 0 420 420" fill="none" version="1.1" id="svg306" sodipodi:docname="logo.svg" inkscape:version="1.2.2 (b0a8486541, 2022-12-01)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs310"><clipPath id="SvgjsClipPath1136"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs>
+  <sodipodi:namedview id="namedview308" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="true" inkscape:zoom="1.4880952" inkscape:cx="191.52" inkscape:cy="210" inkscape:window-width="1600" inkscape:window-height="831" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg306">
+    <inkscape:grid type="xygrid" id="grid393"></inkscape:grid>
+  </sodipodi:namedview>
+  <rect x="0" y="0" width="100%" height="100%" fill="black" id="rect296"></rect>
+  <g transform="translate(0, 106)" id="g304">
+    <rect x="49.509998" y="170" width="318.54401" height="10" fill="#ffffff" id="rect300" style="stroke-width:0.870884"></rect>
+    <rect x="49.510376" y="-7.7982521" width="318.54401" height="10" fill="#ffffff" id="rect300-3" style="stroke-width:0.870884"></rect>
+    <text x="210" y="104" font-family="'Segoe UI', Arial, sans-serif" font-size="192px" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" user-select="none" id="text302">
+      404
+    </text>
+  </g>
+</svg></svg></g></g></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1137)"><rect width="1000" height="1000" fill="#000000"></rect><g transform="matrix(1.6666666666666667,0,0,1.6666666666666667,150,150)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="420" height="420"><svg width="420" height="420" viewBox="0 0 420 420" fill="none" version="1.1" id="svg306" sodipodi:docname="logo.svg" inkscape:version="1.2.2 (b0a8486541, 2022-12-01)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs310"><clipPath id="SvgjsClipPath1137"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs>
+  <sodipodi:namedview id="namedview308" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="true" inkscape:zoom="1.4880952" inkscape:cx="191.52" inkscape:cy="210" inkscape:window-width="1600" inkscape:window-height="831" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg306">
+    <inkscape:grid type="xygrid" id="grid393"></inkscape:grid>
+  </sodipodi:namedview>
+  <rect x="0" y="0" width="100%" height="100%" fill="black" id="rect296"></rect>
+  <g transform="translate(0, 106)" id="g304">
+    <rect x="49.509998" y="170" width="318.54401" height="10" fill="#ffffff" id="rect300" style="stroke-width:0.870884"></rect>
+    <rect x="49.510376" y="-7.7982521" width="318.54401" height="10" fill="#ffffff" id="rect300-3" style="stroke-width:0.870884"></rect>
+    <text x="210" y="104" font-family="'Segoe UI', Arial, sans-serif" font-size="192px" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" user-select="none" id="text302">
+      404
+    </text>
+  </g>
+</svg></svg></g></g></svg></g></svg>

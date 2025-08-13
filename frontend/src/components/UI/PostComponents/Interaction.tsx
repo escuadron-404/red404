@@ -13,6 +13,7 @@ interface InteractionProps {
 	linkToCopy: string;
 	comments: CommentProps[];
 }
+
 export default function Interaction(props: InteractionProps) {
 	const [showComments, setShowComments] = useState(false);
 	const [showShareOptions, setShowShareOptions] = useState(false);
@@ -26,7 +27,7 @@ export default function Interaction(props: InteractionProps) {
 	});
 	return (
 		<div className="interact flex gap-4 ">
-			<LikeButton size={25} onClick={() => console.log("liked")} />
+			<LikeButton size={25} onLike={() => console.log("liked")} />
 			<div className="flex items-center relative" ref={showCommentsRef}>
 				<CommentButton onClick={() => setShowComments((prev) => !prev)} />
 				{showComments && (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import GoogleIcon from "../assets/icons/GoogleIcon";
 import MetaIcon from "../assets/icons/MetaIcon";
 import { loginUser } from "../auth/api/login";
@@ -84,7 +85,7 @@ function Login() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const [token, setToken] = useState<string | null>(null);
-
+	const navigate = useNavigate();
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError("");
@@ -92,6 +93,7 @@ function Login() {
 			const token = await loginUser(email, password);
 			setToken(token);
 			localStorage.setItem("authToken", token);
+			navigate("/home");
 		} catch (err) {
 			setError((err as Error).message);
 		}

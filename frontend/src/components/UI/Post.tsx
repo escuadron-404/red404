@@ -26,6 +26,7 @@ function PostHeader(props: PostActions) {
 	useClickOutside(dropdownRef, () => {
 		showPostOptions && setShowPostOptions(false);
 	});
+
 	return (
 		<div className="author justify-between flex gap-5">
 			<div className="flex gap-2">

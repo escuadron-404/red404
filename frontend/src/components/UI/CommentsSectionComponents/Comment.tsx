@@ -6,7 +6,7 @@ export interface CommentProps {
 	author: string;
 	authorAvatar: string;
 	isReply: boolean;
-	replies: CommentProps | null;
+	replies: number | null;
 	likes: number;
 }
 export default function Comment(props: CommentProps) {
@@ -38,7 +38,7 @@ export default function Comment(props: CommentProps) {
 						)}
 					</div>
 				</div>
-				<LikeButton size={15} onClick={() => console.log("liked")} />
+				<LikeButton size={15} onLike={() => console.log("liked")} />
 			</div>
 		</div>
 	);

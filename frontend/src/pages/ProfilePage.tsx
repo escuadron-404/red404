@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router";
 import ContentContainer from "../components/UI/ProfileComponents/ContentContainer";
 import Tabs from "../components/UI/ProfileComponents/Tabs";
 import profileData from "../templates/ProfileTemplate";
