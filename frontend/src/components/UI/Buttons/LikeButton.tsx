@@ -2,14 +2,14 @@ import { HeartIcon } from "lucide-react";
 import { useState } from "react";
 
 interface LikeButtonProps {
-	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	onLike: (event: React.MouseEvent<HTMLButtonElement>) => void;
 	size: number;
 }
 export default function LikeButton(props: LikeButtonProps) {
 	const [liked, setLiked] = useState(false);
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
 		setLiked((prev) => !prev);
-		props.onClick(event);
+		props.onLike(event);
 	};
 
 	return (

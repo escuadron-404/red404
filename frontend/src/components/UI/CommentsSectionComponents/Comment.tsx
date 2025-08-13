@@ -1,6 +1,7 @@
 import LikeButton from "../Buttons/LikeButton";
 
 export interface CommentProps {
+	id: number;
 	text: string;
 	author: string;
 	authorAvatar: string;
