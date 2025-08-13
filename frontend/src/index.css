@@ -1,29 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 :root {
-	font-family: "Roboto", "sans-serif";
-	line-height: 1.5;
-	font-weight: 400;
-	--background-color: oklch(14.7% 0.004 49.25);
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --background-color: oklch(14.7% 0.004 49.25);
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 [data-theme="light"] {
-	--background-color: oklch(92.2% 0 0);
+  --background-color: oklch(92.2% 0 0);
 }
 @theme inline {
-	--color-base: var(--background-color);
-	--color-primary: oklch(80.8% 0.114 19.571);
-	--color-text-light: oklch(70.9% 0.01 56.259);
-	--color-accent: oklch(21.6% 0.006 56.043);
-	--color-accent-secondary: oklch(44.4% 0.011 73.639);
+  --color-base: var(--background-color);
+  --color-primary: oklch(80.8% 0.114 19.571);
+  --color-text-light: oklch(70.9% 0.01 56.259);
+  --color-accent: oklch(21.6% 0.006 56.043);
+  --color-accent-secondary: oklch(44.4% 0.011 73.639);
 }
