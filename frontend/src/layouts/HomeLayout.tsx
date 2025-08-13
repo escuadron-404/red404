@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 
 const HomeLayout = () => {
   return (
-    <div className="w-full h-screen flex bg-base">
+    <div className="w-full flex bg-base">
       <NavBar />
       <Outlet />
     </div>
