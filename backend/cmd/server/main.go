@@ -70,16 +70,15 @@ func main() {
 	authMiddleware := middleware.NewAuthMiddleware(jwtUtil)
 
 	// Setup routes using the routes package
-    mux := routes.SetupRoutes(userHandler, authHandler, authMiddleware)
+	mux := routes.SetupRoutes(userHandler, authHandler, authMiddleware)
 
-    // Wrap mux with CORS
-    corsHandler := middleware.NewCORS().Handler(mux)
+	// Wrap mux with CORS
+	corsHandler := middleware.NewCORS().Handler(mux)
 
-    server := &http.Server{
-      Addr:    ":" + cfg.ServerPort,
-      Handler: corsHandler,
-    }
-
+	server := &http.Server{
+		Addr:    ":" + cfg.ServerPort,
+		Handler: corsHandler,
+	}
 
 	// Wait for interrupt signal to gracefully shutdown the server
 	quit := make(chan os.Signal, 1)
