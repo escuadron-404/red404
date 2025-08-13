@@ -23,8 +23,6 @@ jobs:
   biome-lint:
     name: Biome Lint (Frontend)
     runs-on: ubuntu-latest
-    defaults:
-      working-directory: frontend/
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,17 +30,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          working-directory: frontend/
           node-version: '24.4.0' 
           cache: 'npm' 
 
       - name: Install Frontend Dependencies
-        run: npm ci 
+        run: cd frontend/ && npm ci 
 
       - name: Setup Biome CLI
         uses: biomejs/setup-biome@v2 
         with:
-          version: latest 
+          version: latest
+          working-directory: frontend/
 
       - name: Run Biome CI
-        run: biome ci . 
+        run: cd frontend/ && biome ci . 
+
 
