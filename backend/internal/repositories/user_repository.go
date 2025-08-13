@@ -67,6 +67,13 @@ func (r *userRepository) GetByEmail(ctx context.Context, email string) (*models.
 }
 
 func (r *userRepository) GetAll(ctx context.Context, limit, offset int) ([]models.User, int, error) {
+	const maxLimit = 100
+	if limit > maxLimit {
+		limit = maxLimit
+	} else if limit < 0 {
+		limit = 0
+	}
+
 	var totalUsers int
 	countQuery := `SELECT COUNT(*) FROM users`
 	err := r.db.QueryRow(ctx, countQuery).Scan(&totalUsers)
