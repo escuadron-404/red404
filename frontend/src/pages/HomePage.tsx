@@ -5,10 +5,10 @@ function HomePage() {
 	return (
 		<div className="w-full flex bg-base">
 			<NavBar />
-			<main className="w-full flex flex-col gap-10 pl-20 py-4">
-				<Post PostID="t2sld21sl" />
-				<Post PostID="t2sld21sl" />
-				<Post PostID="t2sld21sl" />
+			<main className="w-full min-h-screen flex flex-col gap-10 pl-20 py-4">
+				<Post />
+				<Post />
+				<Post />
 			</main>
 		</div>
 	);
