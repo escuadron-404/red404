@@ -4,6 +4,7 @@ import {
 	HomeIcon,
 	MessageCircleDashedIcon,
 	SearchIcon,
+	UserCircle2Icon,
 } from "lucide-react";
 import NavBarLink from "./NavBarComponents/NavBarLink";
 
@@ -29,6 +30,9 @@ function NavBar() {
 					</NavBarLink>
 					<NavBarLink link="/brainrot">
 						<BrainIcon size={30} />
+					</NavBarLink>
+					<NavBarLink link="/profile">
+						<UserCircle2Icon size={30} />
 					</NavBarLink>
 				</nav>
 			</div>
