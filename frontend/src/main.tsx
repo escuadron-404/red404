@@ -3,8 +3,6 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import "./App.css";
-
 // Layouts
 import HomeLayout from "./layouts/HomeLayout";
 import AuthPage from "./pages/Auth";
