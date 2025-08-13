@@ -2,7 +2,7 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
-cmd = "go build -o ./tmp/main ./cmd/server/main.go" 
+cmd = "go build -tags dev -o ./tmp/main ./cmd/server/main.go"
 bin = "tmp/main"
 full_bin = ""
 args = []

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="420"
+   height="420"
+   viewBox="0 0 420 420"
+   fill="none"
+   version="1.1"
+   id="svg306"
+   sodipodi:docname="logo.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs310" />
+  <sodipodi:namedview
+     id="namedview308"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="true"
+     inkscape:zoom="1.4880952"
+     inkscape:cx="191.52"
+     inkscape:cy="210"
+     inkscape:window-width="1600"
+     inkscape:window-height="831"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg306">
+    <inkscape:grid
+       type="xygrid"
+       id="grid393" />
+  </sodipodi:namedview>
+  <rect
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     fill="black"
+     id="rect296" />
+  <g
+     transform="translate(0, 106)"
+     id="g304">
+    <rect
+       x="49.509998"
+       y="170"
+       width="318.54401"
+       height="10"
+       fill="#ffffff"
+       id="rect300"
+       style="stroke-width:0.870884" />
+    <rect
+       x="49.510376"
+       y="-7.7982521"
+       width="318.54401"
+       height="10"
+       fill="#ffffff"
+       id="rect300-3"
+       style="stroke-width:0.870884" />
+    <text
+       x="210"
+       y="104"
+       font-family="'Segoe UI', Arial, sans-serif"
+       font-size="192px"
+       font-weight="900"
+       fill="#FFFFFF"
+       text-anchor="middle"
+       dominant-baseline="middle"
+       user-select="none"
+       id="text302">
+      404
+    </text>
+  </g>
+</svg>
