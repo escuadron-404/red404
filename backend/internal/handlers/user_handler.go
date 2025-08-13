@@ -64,6 +64,7 @@ func (h *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
+	const MaxLimit = 100
 	ctx := r.Context()
 
 	limitStr := r.URL.Query().Get("limit")
@@ -72,6 +73,8 @@ func (h *UserHandler) GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	limit, err := strconv.Atoi(limitStr)
 	if err != nil || limit <= 0 {
 		limit = 10
+	} else if limit > MaxLimit {
+		limit = MaxLimit
 	}
 
 	offset, err := strconv.Atoi(offsetStr)
