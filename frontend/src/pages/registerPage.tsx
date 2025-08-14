@@ -3,7 +3,7 @@ import Button from "../components/AuthComponents/Button";
 import { registerUser } from "../auth/api/api";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function RegisterPage () {
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -84,7 +84,7 @@ export default function RegisterPage () {
             <p className="text-muted-foreground text-center">
               Already have an account?{" "}
               <Link
-                to="/login"
+                to="/"
                 className="hover:underline hover:text-red-500 transition-all duration-300"
               >
                 Login
