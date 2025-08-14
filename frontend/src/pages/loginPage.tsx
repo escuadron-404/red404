@@ -1,50 +1,39 @@
 import { useState } from "react";
 import Button from "../components/AuthComponents/Button";
-import { registerUser } from "../auth/api/api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { loginUser } from "../auth/api/api";
 
-export default function Register() {
+export default function LoginPage () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
-
-  const handleRegister = async (e: React.FormEvent) => {
+  const [token] = useState<string | null>(null);
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setSuccess(false);
     try {
-      const response = await registerUser({ email, password });
+      const response = await loginUser({ email, password });
       console.log(response);
-      setSuccess(true);
-      setEmail("");
-      setPassword("");
-      navigate("/login");
     } catch (err) {
       setError((err as Error).message);
     }
   };
-
-  if (success) {
-    return <div>Registration successful! You can now log in.</div>;
+  if (token) {
+    return <div>Login successful!</div>;
   }
-
   return (
-    <main className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10 relative">
+    <main className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10 relative card">
       <div className="w-full max-w-md sm:max-w-lg border p-6 sm:p-8 rounded-2xl bg-accent drop-shadow-red-500 drop-shadow-sm flex flex-col gap-6">
         <div className="flex flex-col items-center justify-center gap-2">
           <h1 className="text-3xl sm:text-4xl p-2 uppercase drop-shadow-red-500 drop-shadow-sm">
             red404
           </h1>
-          <h3 className="text-muted-foreground text-center">
-            Create your account
-          </h3>
+          <h3 className="text-muted-foreground text-center">Welcome back</h3>
         </div>
 
         <form
           className="w-full flex flex-col items-center pb-4 sm:pb-6"
-          onSubmit={handleRegister}
+          onSubmit={handleLogin}
         >
           <div className="w-full flex flex-col gap-3 sm:gap-4 p-2 sm:p-0">
             <label className="self-start" htmlFor="email">
@@ -78,19 +67,19 @@ export default function Register() {
             />
             <Button
               type="submit"
-              text="Register"
+              text="Login"
               className="w-full hover:bg-accent-secondary my-2 "
             />
-            <p className="text-muted-foreground text-center">
-              Already have an account?{" "}
-              <Link
-                to="/login"
-                className="hover:underline hover:text-red-500 transition-all duration-300"
-              >
-                Login
-              </Link>
-            </p>
           </div>
+          <p className="text-muted-foreground text-center">
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              className="hover:underline hover:text-red-500 transition-all duration-300"
+            >
+              Register
+            </Link>
+          </p>
         </form>
         {error && (
           <span className="mt-2 block text-center error text-red-800">

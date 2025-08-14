@@ -5,7 +5,9 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 // Layouts
 import HomeLayout from "./layouts/HomeLayout";
-import AuthPage from "./pages/Auth";
+// import AuthPage from "./pages/Auth";
+import LoginPage from "./pages/loginPage";
+import RegisterPage from "./pages/registerPage";
 import Brainrot from "./pages/BrainrotPage";
 import ExplorePage from "./pages/ExplorePage";
 import HomePage from "./pages/HomePage";
@@ -25,8 +27,8 @@ ReactDOM.createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AuthPage />} />
-        <Route path="/auth" />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
         <Route element={<HomeLayout />}>
           <Route path="/home" element={<HomePage />} />
@@ -40,5 +42,5 @@ ReactDOM.createRoot(root).render(
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );
