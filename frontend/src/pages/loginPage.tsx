@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Button from "../components/AuthComponents/Button";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { loginUser } from "../auth/api/api";
 
-export default function LoginPage () {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
