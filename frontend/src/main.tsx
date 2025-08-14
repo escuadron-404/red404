@@ -5,7 +5,6 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 // Layouts
 import HomeLayout from "./layouts/HomeLayout";
-// import AuthPage from "./pages/Auth";
 import LoginPage from "./pages/loginPage";
 import RegisterPage from "./pages/registerPage";
 import Brainrot from "./pages/BrainrotPage";
