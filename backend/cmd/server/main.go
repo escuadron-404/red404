@@ -73,11 +73,11 @@ func main() {
 	mux := routes.SetupRoutes(userHandler, authHandler, authMiddleware)
 
 	// Wrap mux with CORS
-	corsHandler := middleware.NewCORS().Handler(mux)
+	//corsHandler := middleware.NewCORS().Handler(mux)
 
 	server := &http.Server{
 		Addr:    ":" + cfg.ServerPort,
-		Handler: corsHandler,
+		Handler: mux,
 	}
 
 	// Wait for interrupt signal to gracefully shutdown the server
