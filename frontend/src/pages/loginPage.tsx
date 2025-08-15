@@ -1,19 +1,26 @@
 import { useState } from "react";
 import Button from "../components/AuthComponents/Button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { loginUser } from "../auth/api/api";
+import type { ResponseType } from "../auth/api/types";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [token] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     try {
-      const response = await loginUser({ email, password });
-      console.log(response);
+      const response = (await loginUser({ email, password })) as ResponseType;
+      if (response.success) {
+        setToken(response.data.token); // TODO: add token to local storage
+        navigate("/home");
+      } else {
+        setError(response.message);
+      }
     } catch (err) {
       setError((err as Error).message);
     }

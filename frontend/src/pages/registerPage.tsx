@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../components/AuthComponents/Button";
 import { registerUser } from "../auth/api/api";
 import { Link, useNavigate } from "react-router";
+import type { ResponseType } from "../auth/api/types";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -15,12 +16,19 @@ export default function RegisterPage() {
     setError("");
     setSuccess(false);
     try {
-      const response = await registerUser({ email, password });
-      console.log(response);
-      setSuccess(true);
-      setEmail("");
-      setPassword("");
-      navigate("/login");
+      const response = (await registerUser({
+        email,
+        password,
+      })) as ResponseType;
+
+      if (response.success) {
+        setSuccess(true);
+        setEmail("");
+        setPassword("");
+        navigate("/login");
+      } else {
+        setError(response.message);
+      }
     } catch (err) {
       setError((err as Error).message);
     }
