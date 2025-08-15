@@ -8,3 +8,5 @@ export type RegisterType = {
     email: string;
     password: string;
 };
+
+export type ResponseType = Record<string, any>;

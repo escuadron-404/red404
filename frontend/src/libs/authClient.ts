@@ -32,7 +32,6 @@ export class AuthClient implements HttpClient {
     }
 
     public async post<T, B>(path: string, body: B): Promise<T> {
-        console.log(this.baseUrl)
         const res = await fetch(`${this.baseUrl}${path}`, { method: "POST", headers: this.headers(), body: JSON.stringify(body) });
         return res.json();
     }
@@ -53,4 +52,4 @@ export class AuthClient implements HttpClient {
     }
 }
 
-export const authClient = new AuthClient(import.meta.env.VITE_API_URL);
+export const authClient = new AuthClient(import.meta.env.VITE_API_URL || "http://localhost:8080");
