@@ -32,3 +32,18 @@ button {
   --color-accent: oklch(21.6% 0.006 56.043);
   --color-accent-secondary: oklch(44.4% 0.011 73.639);
 }
+
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
