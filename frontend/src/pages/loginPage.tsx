@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Button from "../components/AuthComponents/Button";
 import { Link, useNavigate } from "react-router";
 import { loginUser } from "../auth/api/api";
 import type { ResponseType } from "../auth/api/types";
+import Button from "../components/AuthComponents/Button";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -16,10 +16,11 @@ export default function LoginPage() {
     try {
       const response = (await loginUser({ email, password })) as ResponseType;
       if (response.success) {
-        setToken(response.data.token); // TODO: add token to local storage
+        const data = response.data as { token: string };
+        setToken(data.token);
         navigate("/home");
       } else {
-        setError(response.message);
+        setError(String(response.message));
       }
     } catch (err) {
       setError((err as Error).message);

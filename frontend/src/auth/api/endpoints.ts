@@ -1,5 +1,4 @@
 export const AuthEndpoints = {
-    register: "/api/register",
-    login: "/api/login",
+  register: "/api/register",
+  login: "/api/login",
 };
-

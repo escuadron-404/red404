@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 :root {
-  font-family: "Roboto", "sans-serif";
+  font-family: "Roboto", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   --background-color: oklch(14.7% 0.004 49.25);

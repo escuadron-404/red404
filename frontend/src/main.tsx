@@ -5,14 +5,14 @@ import { BrowserRouter, Route, Routes } from "react-router";
 
 // Layouts
 import HomeLayout from "./layouts/HomeLayout";
-import LoginPage from "./pages/loginPage";
-import RegisterPage from "./pages/registerPage";
 import Brainrot from "./pages/BrainrotPage";
 import ExplorePage from "./pages/ExplorePage";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/loginPage";
 import MessagePage from "./pages/MessagesPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/registerPage";
 import SearchPage from "./pages/SearchPage";
 
 let root = document.getElementById("root");
@@ -41,5 +41,5 @@ ReactDOM.createRoot(root).render(
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );
