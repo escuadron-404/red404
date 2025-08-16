@@ -10,7 +10,7 @@ import NavBarLink from "./NavBarComponents/NavBarLink";
 
 function NavBar() {
   return (
-    <div className="flex flex-col items-center py-4 pl-2 pr-6 border-r border-accent-secondary">
+    <div className="flex flex-col items-center sticky top-0 left-0 h-screen py-4 pl-2 pr-6 border-r border-accent-secondary">
       <header className="mb-9">
         <span className="font-bold text-xl text-primary">red404</span>
       </header>
