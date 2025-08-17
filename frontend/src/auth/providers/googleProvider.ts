@@ -1,7 +1,16 @@
-function googleAuth() {
+type GoogleAuthMode = "login" | "register";
+
+function googleAuth(mode: GoogleAuthMode) {
   console.log("logging with google");
-  // TODO: refactor this, for consistency we should be able to use hooks here
-  window.location.assign("/home");
+
+  if (mode === "login") {
+    window.location.assign("/home");
+  }
+
+  if (mode === "register") {
+    // TODO: create a sub-page to setup the user account
+    window.location.assign("/register?setup=true");
+  }
 }
 
 export default googleAuth;
