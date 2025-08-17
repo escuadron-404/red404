@@ -1,10 +1,12 @@
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-// Layouts
+// Layout
 import HomeLayout from "./layouts/HomeLayout";
+// Pages
 import Brainrot from "./pages/BrainrotPage";
 import ExplorePage from "./pages/ExplorePage";
 import HomePage from "./pages/HomePage";
@@ -24,22 +26,24 @@ if (!root) {
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        <Route element={<HomeLayout />}>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/messages" element={<MessagePage />} />
-          <Route path="/brainrot" element={<Brainrot />} />
-          <Route path="/profile/*" element={<ProfilePage />} />
-        </Route>
+          <Route element={<HomeLayout />}>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/messages" element={<MessagePage />} />
+            <Route path="/brainrot" element={<Brainrot />} />
+            <Route path="/profile/*" element={<ProfilePage />} />
+          </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   </StrictMode>,
 );
