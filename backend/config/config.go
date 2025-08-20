@@ -2,7 +2,7 @@
 package config
 
 import (
-	"log"
+	"log/slog"
 	"os"
 	"strconv"
 
@@ -24,7 +24,7 @@ type Config struct {
 func LoadConfig() *Config {
 	err := godotenv.Load()
 	if err != nil {
-		log.Println("No .env file found, using environment variables")
+		slog.Error("No .env file found, using environment variables")
 	}
 
 	expHours, err := strconv.Atoi(getEnv("JWT_EXPIRATION_HOURS", "24"))

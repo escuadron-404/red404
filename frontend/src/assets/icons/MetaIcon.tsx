@@ -1,3 +1,5 @@
+import { useId } from "react";
+
 interface IconProps {
   size?: string;
 }
@@ -7,7 +9,7 @@ const MetaIcon = (props: IconProps) => (
     width={props.size || "25px"}
     height={props.size || "25px"}
     viewBox="0 0 32 32"
-    id="Camada_1"
+    id={useId()}
     version="1.1"
     xmlSpace="preserve"
     xmlns="http://www.w3.org/2000/svg"
