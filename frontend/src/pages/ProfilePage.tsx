@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router";
+import { UseAuth } from "../auth/context/auth-context";
 import ContentContainer from "../components/UI/ProfileComponents/ContentContainer";
 import Tabs from "../components/UI/ProfileComponents/Tabs";
 import profileData from "../templates/ProfileTemplate";
@@ -46,6 +47,11 @@ function MoreOptions() {
   return <Button text="..." />;
 }
 
+function LogoutButton() {
+  const { logout } = UseAuth();
+  return <Button text="logout" onClick={() => logout()} />;
+}
+
 function ProfileActions() {
   const [isFollowed, setIsFollowed] = useState(false);
   function handleOnFollow() {
@@ -57,6 +63,7 @@ function ProfileActions() {
       <FollowButton onFollow={handleOnFollow} followStatus={isFollowed} />
       <MessageButton />
       <MoreOptions />
+      <LogoutButton />
     </div>
   );
 }

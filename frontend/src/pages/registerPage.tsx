@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { registerUser } from "../auth/api/api";
-import type { ResponseType } from "../auth/api/types";
 import Button from "../components/AuthComponents/Button";
 
 export default function RegisterPage() {
@@ -16,10 +15,10 @@ export default function RegisterPage() {
     setError("");
     setSuccess(false);
     try {
-      const response = (await registerUser({
+      const response = await registerUser({
         email,
         password,
-      })) as ResponseType;
+      });
 
       if (response.success) {
         setSuccess(true);
