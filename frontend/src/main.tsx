@@ -6,7 +6,7 @@ import { AuthProvider } from "./auth/context/auth-context";
 
 // Components
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import HomeLayout from "./layouts/HomeLayout";
 // Layouts
 import Brainrot from "./pages/BrainrotPage";
 import ExplorePage from "./pages/ExplorePage";
@@ -17,7 +17,6 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/registerPage";
 import SearchPage from "./pages/SearchPage";
-import HomeLayout from "./layouts/HomeLayout";
 
 let root = document.getElementById("root");
 
@@ -91,5 +90,5 @@ ReactDOM.createRoot(root).render(
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-  </StrictMode>
+  </StrictMode>,
 );

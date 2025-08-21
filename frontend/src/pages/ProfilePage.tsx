@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router";
+import { UseAuth } from "../auth/context/auth-context";
 import ContentContainer from "../components/UI/ProfileComponents/ContentContainer";
 import Tabs from "../components/UI/ProfileComponents/Tabs";
 import profileData from "../templates/ProfileTemplate";
-import { useAuth } from "../auth/context/auth-context";
 
 interface ButtonProps {
   text: string;
@@ -48,7 +48,7 @@ function MoreOptions() {
 }
 
 function LogoutButton() {
-  const { logout } = useAuth();
+  const { logout } = UseAuth();
   return <Button text="logout" onClick={() => logout()} />;
 }
 

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, Navigate } from "react-router";
+import { UseAuth } from "../auth/context/auth-context";
 import Button from "../components/AuthComponents/Button";
-import { useAuth } from "../auth/context/auth-context";
 
 export default function LoginPage() {
-  const { login, isAuthenticated, isLoading, isInitialized } = useAuth();
+  const { login, isAuthenticated, isLoading, isInitialized } = UseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

@@ -4,7 +4,6 @@ import {
   HomeIcon,
   MessageCircleDashedIcon,
   SearchIcon,
-  LogOutIcon,
   UserCircle2Icon,
 } from "lucide-react";
 import NavBarLink from "./NavBarComponents/NavBarLink";

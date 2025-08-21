@@ -1,12 +1,12 @@
 import { Navigate } from "react-router";
-import { useAuth } from "../auth/context/auth-context";
+import { UseAuth } from "../auth/context/auth-context";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated, isLoading, isInitialized } = useAuth();
+  const { isAuthenticated, isLoading, isInitialized } = UseAuth();
 
   // Mostrar loading mientras se inicializa
   if (!isInitialized || isLoading) {

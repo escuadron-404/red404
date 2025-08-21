@@ -1,6 +1,11 @@
 import { authClient, type HttpClient } from "../../libs/authClient";
 import { AuthEndpoints } from "./endpoints";
-import type { LoginType, RegisterType, loginResponseType, registerResponseType } from "./types";
+import type {
+  LoginType,
+  loginResponseType,
+  RegisterType,
+  registerResponseType,
+} from "./types";
 
 export const registerUser = async (
   data: RegisterType,

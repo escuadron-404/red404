@@ -1,11 +1,11 @@
 import {
   createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
   type ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import { loginUser } from "../api/api";
 import type { loginResponseType } from "../api/types";
@@ -25,7 +25,7 @@ interface AuthContextType {
   error: string | null;
   login: (
     email: string,
-    password: string
+    password: string,
   ) => Promise<loginResponseType | undefined>;
   logout: () => void;
   clearError: () => void;
@@ -122,6 +122,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
       }
     } catch (error) {
+      console.log("auth error: ", error);
       localStorage.removeItem("auth_token");
       localStorage.removeItem("user_data");
       setUser(null);
@@ -158,13 +159,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       login,
       logout,
       clearError,
-    ]
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => {
+export const UseAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
