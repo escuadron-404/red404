@@ -22,4 +22,9 @@ export type loginResponseType = {
   };
 };
 
+export type registerResponseType = {
+  success: boolean;
+  message: string;
+};
+
 export type ResponseType = Record<string, unknown>;
