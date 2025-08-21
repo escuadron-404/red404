@@ -122,7 +122,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
       }
     } catch (error) {
-      console.error("Error verificando autenticación:", error);
       localStorage.removeItem("auth_token");
       localStorage.removeItem("user_data");
       setUser(null);
