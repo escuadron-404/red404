@@ -8,14 +8,8 @@ import {
   UserCircle2Icon,
 } from "lucide-react";
 import NavBarLink from "./NavBarComponents/NavBarLink";
-import { useAuth } from "../auth/context/auth-context";
 
 function NavBar() {
-  const { logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
   return (
     <div className="flex flex-col items-center sticky top-0 left-0 h-screen py-4 pl-2 pr-6 border-r border-accent-secondary">
       <header className="mb-9">
@@ -40,9 +34,6 @@ function NavBar() {
         <NavBarLink link="/profile">
           <UserCircle2Icon size={30} />
         </NavBarLink>
-        <button className="text-primary" onClick={handleLogout} type="button">
-          <LogOutIcon size={20} />
-        </button>
       </nav>
     </div>
   );

@@ -4,6 +4,7 @@ import { NavLink, Route, Routes } from "react-router";
 import ContentContainer from "../components/UI/ProfileComponents/ContentContainer";
 import Tabs from "../components/UI/ProfileComponents/Tabs";
 import profileData from "../templates/ProfileTemplate";
+import { useAuth } from "../auth/context/auth-context";
 
 interface ButtonProps {
   text: string;
@@ -46,6 +47,11 @@ function MoreOptions() {
   return <Button text="..." />;
 }
 
+function LogoutButton() {
+  const { logout } = useAuth();
+  return <Button text="logout" onClick={() => logout()} />;
+}
+
 function ProfileActions() {
   const [isFollowed, setIsFollowed] = useState(false);
   function handleOnFollow() {
@@ -57,6 +63,7 @@ function ProfileActions() {
       <FollowButton onFollow={handleOnFollow} followStatus={isFollowed} />
       <MessageButton />
       <MoreOptions />
+      <LogoutButton />
     </div>
   );
 }
