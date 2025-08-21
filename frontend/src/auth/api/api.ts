@@ -1,6 +1,6 @@
 import { authClient, type HttpClient } from "../../libs/authClient";
 import { AuthEndpoints } from "./endpoints";
-import type { LoginType, RegisterType } from "./types";
+import type { LoginType, RegisterType, loginResponseType } from "./types";
 
 export const registerUser = async (
   data: RegisterType,
@@ -13,7 +13,7 @@ export const registerUser = async (
 export const loginUser = async (
   data: LoginType,
   httpClient: HttpClient = authClient,
-) => {
+): Promise<loginResponseType> => {
   const response = await httpClient.post(AuthEndpoints.login, data);
-  return response;
+  return response as loginResponseType;
 };
