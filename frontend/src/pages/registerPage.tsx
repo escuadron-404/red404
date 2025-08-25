@@ -1,9 +1,10 @@
+import { GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { registerUser } from "../auth/api/api";
 import type { ResponseType } from "../auth/api/types";
+import googleAuth from "../auth/providers/googleProvider";
 import Button from "../components/AuthComponents/Button";
-
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,6 +51,16 @@ export default function RegisterPage() {
           </h3>
         </div>
 
+        <GoogleLogin
+          text="signup_with"
+          onSuccess={(credentialResponse) => {
+            console.log("Google token:", credentialResponse.credential);
+            googleAuth("register");
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
         <form
           className="w-full flex flex-col items-center pb-4 sm:pb-6"
           onSubmit={handleRegister}
