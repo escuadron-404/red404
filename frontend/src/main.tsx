@@ -1,9 +1,12 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import "@/index.css";
-// Layouts
+import { AuthProvider } from "@/auth/context/auth-context";
+
+// Components
+import ProtectedRoute from "@/components/ProtectedRoute";
 import HomeLayout from "@/layouts/HomeLayout";
+// Layouts
 import Brainrot from "@/pages/BrainrotPage";
 import ExplorePage from "@/pages/ExplorePage";
 import HomePage from "@/pages/HomePage";
@@ -23,22 +26,68 @@ if (!root) {
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Rutas públicas */}
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        <Route element={<HomeLayout />}>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/messages" element={<MessagePage />} />
-          <Route path="/brainrot" element={<Brainrot />} />
-          <Route path="/profile/*" element={<ProfilePage />} />
-        </Route>
+          {/* Rutas protegidas */}
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            element={
+              <ProtectedRoute>
+                <HomeLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="/home" element={<HomePage />} />
+          </Route>
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/explore"
+            element={
+              <ProtectedRoute>
+                <ExplorePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/messages"
+            element={
+              <ProtectedRoute>
+                <MessagePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/brainrot"
+            element={
+              <ProtectedRoute>
+                <Brainrot />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/*"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 );

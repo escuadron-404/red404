@@ -1,12 +1,56 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router";
-import FollowButton from "@/components/UI/Buttons/FollowButton.tsx";
-import MessageButton from "@/components/UI/ProfileComponents/Buttons/MessageButton.tsx";
-import MoreOptionsButton from "@/components/UI/ProfileComponents/Buttons/MoreOptions.tsx";
-import ContentContainer from "@/components/UI/ProfileComponents/ContentContainer.tsx";
-import Tabs from "@/components/UI/ProfileComponents/Tabs.tsx";
-import profileData from "@/templates/ProfileTemplate.tsx";
+import { UseAuth } from "@/auth/context/auth-context";
+import ContentContainer from "@/components/UI/ProfileComponents/ContentContainer";
+import Tabs from "@/components/UI/ProfileComponents/Tabs";
+import profileData from "@/templates/ProfileTemplate";
+
+interface ButtonProps {
+  text: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
+}
+
+function Button(props: ButtonProps) {
+  return (
+    <button
+      onClick={props.onClick}
+      className={`${props.className} py-1 font-bold px-2 items-center justify-center border border-accent-secondary rounded-md`}
+      type="button"
+    >
+      <span>{props.text}</span>
+    </button>
+  );
+}
+
+interface FollowButtonProps {
+  onFollow: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  followStatus: boolean;
+}
+
+function FollowButton(props: FollowButtonProps) {
+  return (
+    <Button
+      onClick={props.onFollow}
+      text={props.followStatus ? "followed" : "follow"}
+      className="w-24"
+    />
+  );
+}
+
+function MessageButton() {
+  return <Button text="message" onClick={() => alert("message")} />;
+}
+
+function MoreOptions() {
+  return <Button text="..." />;
+}
+
+function LogoutButton() {
+  const { logout } = UseAuth();
+  return <Button text="logout" onClick={() => logout()} />;
+}
 
 function ProfileActions() {
   const [isFollowed, setIsFollowed] = useState(false);
@@ -18,7 +62,8 @@ function ProfileActions() {
     <div className="flex gap-3 items-center">
       <FollowButton onFollow={handleOnFollow} followStatus={isFollowed} />
       <MessageButton />
-      <MoreOptionsButton />
+      <MoreOptions />
+      <LogoutButton />
     </div>
   );
 }
