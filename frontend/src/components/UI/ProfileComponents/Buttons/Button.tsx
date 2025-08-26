@@ -1,6 +1,8 @@
+import type { MouseEvent } from "react";
+
 interface ButtonProps {
   text: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 
