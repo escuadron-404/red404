@@ -1,4 +1,4 @@
-import Button from "../ProfileComponents/Buttons/Button";
+import Button from "@/components/UI/ProfileComponents/Buttons/Button";
 
 interface FollowButtonProps {
   onFollow: (event: React.MouseEvent<HTMLButtonElement>) => void;

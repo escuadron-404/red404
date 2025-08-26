@@ -1,4 +1,4 @@
-import postData from "./PostTemplate";
+import postData from "@/templates/PostTemplate";
 
 const postData1 = { ...postData, postMedia: "/testPostImage2.jpg" };
 const postData2 = { ...postData, postMedia: "/testPostImage3.jpg" };

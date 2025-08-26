@@ -1,6 +1,6 @@
-import { authClient, type HttpClient } from "../../libs/authClient";
-import { AuthEndpoints } from "./endpoints";
-import type { LoginType, RegisterType } from "./types";
+import { AuthEndpoints } from "@/auth/api/endpoints";
+import type { LoginType, RegisterType } from "@/auth/api/types";
+import { authClient, type HttpClient } from "@/libs/authClient";
 
 export const registerUser = async (
   data: RegisterType,

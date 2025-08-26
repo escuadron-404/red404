@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { loginUser } from "../auth/api/api";
-import type { ResponseType } from "../auth/api/types";
-import Button from "../components/AuthComponents/Button";
+import { loginUser } from "@/auth/api/api";
+import type { ResponseType } from "@/auth/api/types";
+import Button from "@/components/AuthComponents/Button";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

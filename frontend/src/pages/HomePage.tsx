@@ -1,4 +1,4 @@
-import Post from "../components/UI/Post";
+import Post from "@/components/UI/Post";
 
 function HomePage() {
   return (

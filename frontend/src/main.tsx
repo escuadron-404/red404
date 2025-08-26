@@ -1,19 +1,18 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
-
+import "@/index.css";
 // Layouts
-import HomeLayout from "./layouts/HomeLayout";
-import Brainrot from "./pages/BrainrotPage";
-import ExplorePage from "./pages/ExplorePage";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/loginPage";
-import MessagePage from "./pages/MessagesPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import ProfilePage from "./pages/ProfilePage";
-import RegisterPage from "./pages/registerPage";
-import SearchPage from "./pages/SearchPage";
+import HomeLayout from "@/layouts/HomeLayout";
+import Brainrot from "@/pages/BrainrotPage";
+import ExplorePage from "@/pages/ExplorePage";
+import HomePage from "@/pages/HomePage";
+import LoginPage from "@/pages/loginPage";
+import MessagePage from "@/pages/MessagesPage";
+import NotFoundPage from "@/pages/NotFoundPage";
+import ProfilePage from "@/pages/ProfilePage";
+import RegisterPage from "@/pages/registerPage";
+import SearchPage from "@/pages/SearchPage";
 
 let root = document.getElementById("root");
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { registerUser } from "../auth/api/api";
-import type { ResponseType } from "../auth/api/types";
-import Button from "../components/AuthComponents/Button";
+import { registerUser } from "@/auth/api/api";
+import type { ResponseType } from "@/auth/api/types";
+import Button from "@/components/AuthComponents/Button";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");

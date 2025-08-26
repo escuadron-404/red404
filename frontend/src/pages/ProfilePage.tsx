@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router";
-import FollowButton from "../components/UI/Buttons/FollowButton.tsx";
-import MessageButton from "../components/UI/ProfileComponents/Buttons/MessageButton.tsx";
-import MoreOptionsButton from "../components/UI/ProfileComponents/Buttons/MoreOptions.tsx";
-import ContentContainer from "../components/UI/ProfileComponents/ContentContainer.tsx";
-import Tabs from "../components/UI/ProfileComponents/Tabs.tsx";
-import profileData from "../templates/ProfileTemplate.tsx";
+import FollowButton from "@/components/UI/Buttons/FollowButton.tsx";
+import MessageButton from "@/components/UI/ProfileComponents/Buttons/MessageButton.tsx";
+import MoreOptionsButton from "@/components/UI/ProfileComponents/Buttons/MoreOptions.tsx";
+import ContentContainer from "@/components/UI/ProfileComponents/ContentContainer.tsx";
+import Tabs from "@/components/UI/ProfileComponents/Tabs.tsx";
+import profileData from "@/templates/ProfileTemplate.tsx";
 
 function ProfileActions() {
   const [isFollowed, setIsFollowed] = useState(false);

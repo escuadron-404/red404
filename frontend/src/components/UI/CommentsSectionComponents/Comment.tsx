@@ -1,4 +1,4 @@
-import LikeButton from "../Buttons/LikeButton";
+import LikeButton from "@/components/UI/Buttons/LikeButton";
 
 export interface CommentProps {
   id: number;
