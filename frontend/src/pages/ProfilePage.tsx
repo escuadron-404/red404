@@ -175,17 +175,17 @@ export default function ProfilePage() {
               element={
                 <ContentContainer>
                   {profileData.posts.map((post) => (
-                    <a
+                    <NavLink
                       key={post.id}
                       className="group h-96 flex"
-                      href={`/${profileData.userData.userName}/posts/${post.id}`}
+                      to={`/${profileData.userData.userName}/posts/${post.id}`}
                     >
                       <img
                         className="rounded-sm w-full object-cover group-hover:opacity-40 transition duration-150 ease-in-out"
                         src={post.postMedia}
                         alt="post media"
                       />
-                    </a>
+                    </NavLink>
                   ))}
                 </ContentContainer>
               }
