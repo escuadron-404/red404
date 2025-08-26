@@ -1,4 +1,4 @@
-import { authClient, type HttpClient } from "../../libs/authClient";
+import { authClient, type HttpClient } from "@/libs/authClient";
 import { AuthEndpoints } from "./endpoints";
 import type {
   LoginType,

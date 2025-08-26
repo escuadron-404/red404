@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
-import useClickOutside from "../../../hooks/useClickOutside";
-import BookmarkButton from "../Buttons/BookmarkButton";
-import CommentButton from "../Buttons/CommentButton";
-import LikeButton from "../Buttons/LikeButton";
-import ShareButton from "../Buttons/ShareButton";
-import CommentsSection from "../CommentsSection";
-import type { CommentProps } from "../CommentsSectionComponents/Comment";
-import Comment from "../CommentsSectionComponents/Comment";
-import ShareOptions from "./ShareOptions";
+import BookmarkButton from "@/components/UI/Buttons/BookmarkButton";
+import CommentButton from "@/components/UI/Buttons/CommentButton";
+import LikeButton from "@/components/UI/Buttons/LikeButton";
+import ShareButton from "@/components/UI/Buttons/ShareButton";
+import CommentsSection from "@/components/UI/CommentsSection";
+import type { CommentProps } from "@/components/UI/CommentsSectionComponents/Comment";
+import Comment from "@/components/UI/CommentsSectionComponents/Comment";
+import ShareOptions from "@/components/UI/PostComponents/ShareOptions";
+import useClickOutside from "@/hooks/useClickOutside";
 
 interface InteractionProps {
   linkToCopy: string;

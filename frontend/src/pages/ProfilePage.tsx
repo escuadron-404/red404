@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router";
-import { UseAuth } from "../auth/context/auth-context";
-import ContentContainer from "../components/UI/ProfileComponents/ContentContainer";
-import Tabs from "../components/UI/ProfileComponents/Tabs";
-import profileData from "../templates/ProfileTemplate";
+import { UseAuth } from "@/auth/context/auth-context";
+import ContentContainer from "@/components/UI/ProfileComponents/ContentContainer";
+import Tabs from "@/components/UI/ProfileComponents/Tabs";
+import profileData from "@/templates/ProfileTemplate";
 
 interface ButtonProps {
   text: string;
@@ -175,17 +175,17 @@ export default function ProfilePage() {
               element={
                 <ContentContainer>
                   {profileData.posts.map((post) => (
-                    <div key={post.id} className="group h-64">
-                      <a
-                        href={`/${profileData.userData.userName}/posts/${post.id}`}
-                      >
-                        <img
-                          className="rounded-sm group-hover:opacity-40 transition duration-150 ease-in-out"
-                          src={post.postMedia}
-                          alt="post media"
-                        />
-                      </a>
-                    </div>
+                    <NavLink
+                      key={post.id}
+                      className="group h-96 flex"
+                      to={`/${profileData.userData.userName}/posts/${post.id}`}
+                    >
+                      <img
+                        className="rounded-sm w-full object-cover group-hover:opacity-40 transition duration-150 ease-in-out"
+                        src={post.postMedia}
+                        alt="post media"
+                      />
+                    </NavLink>
                   ))}
                 </ContentContainer>
               }

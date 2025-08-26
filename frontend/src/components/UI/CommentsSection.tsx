@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import SendButton from "./Buttons/SendButton";
+import SendButton from "@/components/UI/Buttons/SendButton";
 
 interface CommentsProps {
   children: ReactNode;

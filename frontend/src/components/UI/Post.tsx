@@ -1,11 +1,11 @@
 import { DotIcon, EllipsisIcon, MapPinIcon, MinusIcon } from "lucide-react";
 import { useRef, useState } from "react";
-import useClickOutside from "../../hooks/useClickOutside";
-import postData from "../../templates/PostTemplate.tsx";
-import HideButton from "./Buttons/HideButton.tsx";
-import ReportButton from "./Buttons/ReportButton";
-import UnfollowButton from "./Buttons/UnfollowButton";
-import Interaction from "./PostComponents/Interaction";
+import HideButton from "@/components/UI/Buttons/HideButton.tsx";
+import ReportButton from "@/components/UI/Buttons/ReportButton";
+import UnfollowButton from "@/components/UI/Buttons/UnfollowButton";
+import Interaction from "@/components/UI/PostComponents/Interaction";
+import useClickOutside from "@/hooks/useClickOutside";
+import postData from "@/templates/PostTemplate.tsx";
 
 interface PostActions {
   onClickHide: (event: React.MouseEvent<HTMLButtonElement>) => void;

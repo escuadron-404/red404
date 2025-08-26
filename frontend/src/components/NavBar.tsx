@@ -6,7 +6,7 @@ import {
   SearchIcon,
   UserCircle2Icon,
 } from "lucide-react";
-import NavBarLink from "./NavBarComponents/NavBarLink";
+import NavBarLink from "@/components/NavBarComponents/NavBarLink";
 
 function NavBar() {
   return (
