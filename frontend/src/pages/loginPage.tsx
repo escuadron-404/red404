@@ -8,7 +8,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const idHash = useId()
+  const idHash = useId();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

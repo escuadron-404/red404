@@ -342,8 +342,7 @@
             "noUnsafeNegation": "error",
             "noWith": "error",
             "useStrictMode": "error",
-            "useGetterReturn": "error",
-            "noConstantBinaryExpressions": "error"
+            "useGetterReturn": "error"
           }
         }
       }
