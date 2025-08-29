@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Link, Navigate } from "react-router";
 import { UseAuth } from "@/auth/context/auth-context";
 import Button from "@/components/AuthComponents/Button";
@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const idHash = useId()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
