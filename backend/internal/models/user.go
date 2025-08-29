@@ -6,11 +6,16 @@ import (
 )
 
 type User struct {
-	ID        int       `json:"id" db:"id"`
-	Email     string    `json:"email" db:"email"`
-	Password  string    `json:"-" db:"password"`
-	CreatedAt time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	ID             int        `json:"id"`
+	FullName       *string    `json:"full_name"`
+	Email          string     `json:"email"`
+	Password       string     `json:"password"`
+	Bio            *string    `json:"bio"`
+	ProfilePicture *string    `json:"profile_picture"`
+	CreatedAt      time.Time  `json:"created_at"`
+	UpdatedAt      time.Time  `json:"updated_at"`
+	Deleted        bool       `json:"deleted"`
+	DeletedAt      *time.Time `json:"deleted_at"`
 }
 
 type UserWithoutPassword struct {
