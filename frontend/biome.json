@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": { "ignoreUnknown": false },
   "formatter": { "enabled": true, "indentStyle": "space" },
@@ -48,6 +48,7 @@
           },
           "suspicious": {
             "noAsyncPromiseExecutor": "error",
+            "noUselessRegexBackrefs": "error",
             "noCatchAssign": "error",
             "noClassAssign": "error",
             "noCompareNegZero": "error",
@@ -69,6 +70,7 @@
             "noRedeclare": "error",
             "noShadowRestrictedNames": "error",
             "noSparseArray": "error",
+            "noTsIgnore": "error",
             "noUnsafeNegation": "error",
             "noWith": "error",
             "useGetterReturn": "error"
@@ -315,7 +317,7 @@
           "suspicious": {
             "noAssignInExpressions": "error",
             "noAsyncPromiseExecutor": "error",
-            "noUselessRegexBackrefs": "error",
+            "noConstantBinaryExpressions": "error",
             "noCatchAssign": "error",
             "noClassAssign": "error",
             "noCompareNegZero": "error",

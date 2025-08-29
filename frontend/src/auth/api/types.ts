@@ -7,6 +7,24 @@ export type LoginType = {
 export type RegisterType = {
   email: string;
   password: string;
+  [key: string]: string;
+};
+
+export type loginResponseType = {
+  success: boolean;
+  message: string;
+  data: {
+    token: string;
+    user: {
+      id: string;
+      email: string;
+    };
+  };
+};
+
+export type registerResponseType = {
+  success: boolean;
+  message: string;
 };
 
 export type ResponseType = Record<string, unknown>;

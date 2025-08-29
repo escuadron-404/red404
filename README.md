@@ -49,7 +49,6 @@ my-social-app/
 ├── .env.example      # Example environment variables
 ├── .gitignore        # Files/directories to ignore in Git
 ├── README.md         # This file!
-└── AGENTS.md         # List of contributors and collaboration guidelines
 ```
 
 ## 🚀 Getting Started
@@ -137,7 +136,7 @@ We welcome contributions from everyone! This project is a fantastic opportunity 
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the `LICENSE` file for details (you'll need to create this file separately, it's usually very short).
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ## 💬 Community & Support
 
