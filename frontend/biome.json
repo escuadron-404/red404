@@ -401,7 +401,8 @@
             "noExtraNonNullAssertion": "error",
             "noMisleadingInstantiator": "error",
             "noUnsafeDeclarationMerging": "error",
-            "useNamespaceKeyword": "error"
+            "useNamespaceKeyword": "error",
+            "noTsIgnore": "error"
           }
         }
       }

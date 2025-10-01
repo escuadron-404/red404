@@ -20,7 +20,7 @@ export default function CommentsSection(props: CommentsProps) {
           className=" outline-accent-secondary w-full rounded-md focus:outline p-2 placeholder:text-sm"
           type="text"
           name="comment"
-          id="comment"
+          id={useId()}
           placeholder="add a comment"
         />
         <SendButton onClick={() => console.log("sent")} />

@@ -22,9 +22,7 @@ button {
   cursor: pointer;
 }
 
-[data-theme="light"] {
-  --background-color: oklch(92.2% 0 0);
-}
+/* biome-ignore lint/suspicious/noUnknownAtRules: tailwindcss*/
 @theme inline {
   --color-base: var(--background-color);
   --color-primary: oklch(80.8% 0.114 19.571);

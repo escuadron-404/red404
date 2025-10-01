@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
@@ -25,6 +25,9 @@ import (
 )
 
 func main() {
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	slog.SetDefault(logger)
+
 	// Load configuration
 	cfg := config.LoadConfig()
 
@@ -40,14 +43,15 @@ func main() {
 
 	db, err := database.NewDB(dbConfig)
 	if err != nil {
-		log.Printf("Failed to connect to database: %v\n", err)
+		slog.Error("Failed to connect to database", "err", err)
 		return
 	}
-	defer db.Close()
+	defer db.Close() // closeyoself
 
 	// Run migrations
-	if err := runMigrations(db.Pool); err != nil {
-		log.Printf("Failed to run migrations: %v\n", err)
+	if err := runMigrations(db.Pool); err !=
+		nil {
+		slog.Error("Failed to run migrations", "err", err)
 		return
 	}
 
@@ -57,60 +61,72 @@ func main() {
 
 	// Initialize repositories
 	userRepo := repositories.NewUserRepository(db.Pool)
+	mediaRepo := repositories.NewMediaRepository(db.Pool)
+	postRepo := repositories.NewPostRepository(db.Pool)
 
 	// Initialize services
 	userService := services.NewUserService(userRepo, validate)
 	authService := services.NewAuthService(userRepo, validate, jwtUtil)
+	mediaService := services.NewMediaService(validate, mediaRepo)
+	postService := services.NewPostService(db.Pool, validate, postRepo, mediaService)
 
 	// Initialize handlers
 	userHandler := handlers.NewUserHandler(userService, validate)
 	authHandler := handlers.NewAuthHandler(authService, validate)
+	mediaHandler := handlers.NewMediaUploadHandler(mediaService, validate)
+	postHandler := handlers.NewPostHandler(postService, validate)
 
 	// Initialize middleware
 	authMiddleware := middleware.NewAuthMiddleware(jwtUtil)
 
-	// Setup routes using the routes package
-	mux := routes.SetupRoutes(userHandler, authHandler, authMiddleware)
-
-	// Wrap mux with CORS
-	//corsHandler := middleware.NewCORS().Handler(mux)
+	// Setup routes
+	mux := routes.SetupRoutes(userHandler, authHandler, mediaHandler, postHandler, authMiddleware)
 
 	server := &http.Server{
 		Addr:    ":" + cfg.ServerPort,
 		Handler: mux,
+
+		ReadTimeout:  15 * time.Second,
+		WriteTimeout: 30 * time.Second,
+		IdleTimeout:  60 * time.Second,
 	}
 
 	// Wait for interrupt signal to gracefully shutdown the server
 	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM) // Listen for Ctrl+C and termination signals
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
-	// Start server in a goroutine
+	// media cleanup job in a goroutine
+	cleanupCtx, cleanupCancel := context.WithCancel(context.Background())
+	go mediaService.CleanupExpiredUnusedMedia(cleanupCtx)
+
+	// server in a goroutine
 	go func() {
-		log.Printf("Server starting on port %s", cfg.ServerPort)
+		slog.Info("Server starting", "port", cfg.ServerPort)
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Printf("Server failed to start: %v\n", err)
-			// FIX: Instead of os.Exit(1), signal the main goroutine to shut down.
-			quit <- syscall.SIGTERM
+			slog.Error("Server failed to start", "err", err)
+			quit <- syscall.SIGTERM // whoops!
 		}
 	}()
 
-	<-quit // Block until a signal is received
-	log.Println("Shutting down server...")
+	<-quit // block it
+	slog.Info("Shutting down server...")
 
-	// The context is used to inform the server it has 5 seconds to finish
-	// the request it is currently handling
+	// stop
+	cleanupCancel()
+
+	// fast please
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel() // This defer will now correctly run
+	defer cancel()
 
 	if err := server.Shutdown(ctx); err != nil {
-		log.Printf("Server forced to shutdown: %v\n", err)
-		// FIX: Replace os.Exit(1) with return.
+		slog.Error("Server forced to shutdown", "err", err)
 		return
 	}
 
-	log.Println("Server exited")
+	slog.Info("Server gracefully exited")
 }
 
+// run migrations
 func runMigrations(pool *pgxpool.Pool) error {
 	query := `
 	CREATE TABLE IF NOT EXISTS migrations (

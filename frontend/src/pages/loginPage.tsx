@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Link, Navigate } from "react-router";
 import { UseAuth } from "@/auth/context/auth-context";
 import Button from "@/components/AuthComponents/Button";
@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const idHash = useId();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,12 +58,12 @@ export default function LoginPage() {
           onSubmit={handleLogin}
         >
           <div className="w-full flex flex-col gap-3 sm:gap-4 p-2 sm:p-0">
-            <label className="self-start" htmlFor="email">
+            <label className="self-start" htmlFor={`email-${idHash}`}>
               Email
             </label>
             <input
               type="text"
-              id="email"
+              id={`email-${idHash}`}
               placeholder="Enter your email"
               className="w-full rounded-2xl border border-accent-secondary py-2 px-3 focus:outline-accent-secondary hover:bg-accent-secondary transition-all duration-300"
               value={email}
@@ -71,12 +72,12 @@ export default function LoginPage() {
                 setEmail(e.target.value)
               }
             />
-            <label className="self-start" htmlFor="password">
+            <label className="self-start" htmlFor={`password-${idHash}`}>
               Password
             </label>
             <input
               type="password"
-              id="password"
+              id={`password-${idHash}`}
               placeholder="Enter your password"
               className="w-full rounded-2xl border border-accent-secondary py-2 px-3 focus:outline-accent-secondary hover:bg-accent-secondary transition-all duration-300"
               value={password}
