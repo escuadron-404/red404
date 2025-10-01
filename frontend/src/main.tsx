@@ -1,4 +1,5 @@
 import { StrictMode } from "react";
+import "./index.css";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { AuthProvider } from "@/auth/context/auth-context";
